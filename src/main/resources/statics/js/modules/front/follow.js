@@ -41,110 +41,110 @@ $(function () {
 });
 
 var vm = new Vue({
-	el:'#rrapp',
-	data:{
-		showList: true,
-		title: null,
+    el: '#rrapp',
+    data: {
+        showList: true,
+        title: null,
         username: null,
-		followeds: [],
-		follow: []
-	},
-	created(){
+        followeds: [],
+        follow: []
+    },
+    created() {
         this.initData();
-	},
-	methods: {
-        initData: function(){
-            $.get(baseURL + "front/follow/list/", function(r){
+    },
+    methods: {
+        initData: function () {
+            $.get(baseURL + "front/follow/list/", function (r) {
                 vm.follow = r.follow;
                 vm.followeds = r.followeds;
             });
         },
-		query: function () {
+        query: function () {
             $.ajax({
                 type: "GET",
                 url: baseURL + "front/follow/list",
                 contentType: "application/json",
                 data: JSON.stringify(vm.username),
-                success: function(r) {
+                success: function (r) {
                     if (r.code === 0) {
                         this.followeds = r.data.followeds;
                         this.follow = r.data.follow;
                         console.log(this.followeds)
                         console.log(this.follow)
-                    }else{
-                    	alert(r.msg);
-					}
+                    } else {
+                        alert(r.msg);
+                    }
                 }
             });
-		},
-		add: function(){
-			vm.showList = false;
-			vm.title = "新增";
-			vm.follow = {};
-		},
-		update: function (event) {
-			var id = getSelectedRow();
-			if(id == null){
-				return ;
-			}
-			vm.showList = false;
+        },
+        add: function () {
+            vm.showList = false;
+            vm.title = "新增";
+            vm.follow = {};
+        },
+        update: function (event) {
+            var id = getSelectedRow();
+            if (id == null) {
+                return;
+            }
+            vm.showList = false;
             vm.title = "修改";
 
             vm.getInfo(id)
-		},
-		saveOrUpdate: function (event) {
-			var url = vm.follow.id == null ? "front/follow/save" : "front/follow/update";
-			$.ajax({
-				type: "POST",
-			    url: baseURL + url,
+        },
+        saveOrUpdate: function (event) {
+            var url = vm.follow.id == null ? "front/follow/save" : "front/follow/update";
+            $.ajax({
+                type: "POST",
+                url: baseURL + url,
                 contentType: "application/json",
-			    data: JSON.stringify(vm.follow),
-			    success: function(r){
-			    	if(r.code === 0){
-						alert('操作成功', function(index){
-							vm.reload();
-						});
-					}else{
-						alert(r.msg);
-					}
-				}
-			});
-		},
-		del: function (event) {
-			var ids = getSelectedRows();
-			if(ids == null){
-				return ;
-			}
+                data: JSON.stringify(vm.follow),
+                success: function (r) {
+                    if (r.code === 0) {
+                        alert('操作成功', function (index) {
+                            vm.reload();
+                        });
+                    } else {
+                        alert(r.msg);
+                    }
+                }
+            });
+        },
+        del: function (event) {
+            var ids = getSelectedRows();
+            if (ids == null) {
+                return;
+            }
 
-			confirm('确定要删除选中的记录？', function(){
-				$.ajax({
-					type: "POST",
-				    url: baseURL + "front/follow/delete",
+            confirm('确定要删除选中的记录？', function () {
+                $.ajax({
+                    type: "POST",
+                    url: baseURL + "front/follow/delete",
                     contentType: "application/json",
-				    data: JSON.stringify(ids),
-				    success: function(r){
-						if(r.code == 0){
-							alert('操作成功', function(index){
-								$("#jqGrid").trigger("reloadGrid");
-							});
-						}else{
-							alert(r.msg);
-						}
-					}
-				});
-			});
-		},
-		getInfo: function(id){
-			$.get(baseURL + "front/follow/info/"+id, function(r){
+                    data: JSON.stringify(ids),
+                    success: function (r) {
+                        if (r.code == 0) {
+                            alert('操作成功', function (index) {
+                                $("#jqGrid").trigger("reloadGrid");
+                            });
+                        } else {
+                            alert(r.msg);
+                        }
+                    }
+                });
+            });
+        },
+        getInfo: function (id) {
+            $.get(baseURL + "front/follow/info/" + id, function (r) {
                 vm.follow = r.follow;
             });
-		},
-		reload: function (event) {
-			vm.showList = true;
-			var page = $("#jqGrid").jqGrid('getGridParam','page');
-			$("#jqGrid").jqGrid('setGridParam',{
-                page:page
+        },
+        reload: function (event) {
+            vm.showList = true;
+            var page = $("#jqGrid").jqGrid('getGridParam', 'page');
+            $("#jqGrid").jqGrid('setGridParam', {
+                page: page
             }).trigger("reloadGrid");
-		}
-	}
+        }
+    }
 });

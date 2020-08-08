@@ -47,7 +47,7 @@ http://ai.baidu.com/docs#/Face-Java-SDK/top
 ---
 ##### 3.2 创建FaceUtil，获取ApiFace【单例】
 ```java
-package com.example.common.face.utils;
+package com.cqjtu.common.face.utils;
 
 import com.baidu.aip.face.AipFace;
 import com.baidu.aip.util.Base64Util;
@@ -94,13 +94,12 @@ public class FaceUtil {
 ---
 ##### 3.3 创建FaceResultUtil，统一处理请求
 ```java
-package com.example.common.face.utils;
+package com.cqjtu.common.face.utils;
 
-import com.alibaba.fastjson.JSON;
-import com.example.common.exception.BizException;
-import com.example.common.face.constant.ErrorEnum;
-import com.example.common.face.constant.FaceConstant;
-import com.example.common.face.dto.FaceResult;
+import com.cqjtu.common.exception.BizException;
+import com.cqjtu.common.face.constant.ErrorEnum;
+import com.cqjtu.common.face.constant.FaceConstant;
+import com.cqjtu.common.face.dto.FaceResult;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -164,7 +163,7 @@ public class FaceResultUtil {
 ---
 ##### 3.4 创建FaceResult
 ```java
-package com.example.common.face.dto;
+package com.cqjtu.common.face.dto;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.AllArgsConstructor;
@@ -205,9 +204,9 @@ public class FaceResult implements Serializable {
 ---
 ##### 3.5 创建ImageU
 ```java
-package com.example.common.face.dto;
+package com.cqjtu.common.face.dto;
 
-import com.example.common.face.constant.ImageTypeEnum;
+import com.cqjtu.common.face.constant.ImageTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -235,9 +234,9 @@ public class ImageU implements Serializable {
 
 ##### 3.6 创建FaceUserDTO
 ```java
-package com.example.common.face.dto;
+package com.cqjtu.common.face.dto;
 
-import com.example.common.face.constant.FaceConstant;
+import com.cqjtu.common.face.constant.FaceConstant;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -269,20 +268,20 @@ public class FaceUserDTO<T> implements Serializable {
 ---
 ##### 3.7 创建FaceManage[关键类]
 ```java
-package com.example.common.face;
+package com.cqjtu.common.face;
 
 import com.alibaba.fastjson.JSON;
 import com.baidu.aip.face.FaceVerifyRequest;
 import com.baidu.aip.face.MatchRequest;
-import com.example.common.face.constant.ActionTypeEnum;
-import com.example.common.face.constant.FaceConstant;
-import com.example.common.face.constant.LivenessControlEnum;
-import com.example.common.face.constant.QualityControlEnum;
-import com.example.common.face.dto.FaceResult;
-import com.example.common.face.dto.FaceUserDTO;
-import com.example.common.face.dto.ImageU;
-import com.example.common.face.utils.FaceResultUtil;
-import com.example.common.face.utils.FaceUtil;
+import com.cqjtu.common.face.constant.ActionTypeEnum;
+import com.cqjtu.common.face.constant.FaceConstant;
+import com.cqjtu.common.face.constant.LivenessControlEnum;
+import com.cqjtu.common.face.constant.QualityControlEnum;
+import com.cqjtu.common.face.dto.FaceResult;
+import com.cqjtu.common.face.dto.FaceUserDTO;
+import com.cqjtu.common.face.dto.ImageU;
+import com.cqjtu.common.face.utils.FaceResultUtil;
+import com.cqjtu.common.face.utils.FaceUtil;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -537,17 +536,17 @@ public class FaceManage {
 ```
 ##### 3.7 测试
 ```java
-package com.example.play;
+package com.cqjtu.play;
 
 import com.alibaba.fastjson.JSON;
-import com.example.common.face.FaceManage;
-import com.example.common.face.constant.FaceConstant;
-import com.example.common.face.constant.ImageTypeEnum;
-import com.example.common.face.dto.FaceResult;
-import com.example.common.face.dto.FaceUserDTO;
-import com.example.common.face.dto.ImageU;
-import com.example.common.face.utils.FaceUtil;
-import com.example.common.utils.FilesUtil;
+import com.cqjtu.common.face.FaceManage;
+import com.cqjtu.common.face.constant.FaceConstant;
+import com.cqjtu.common.face.constant.ImageTypeEnum;
+import com.cqjtu.common.face.dto.FaceResult;
+import com.cqjtu.common.face.dto.FaceUserDTO;
+import com.cqjtu.common.face.dto.ImageU;
+import com.cqjtu.common.face.utils.FaceUtil;
+import com.cqjtu.common.utils.FilesUtil;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
