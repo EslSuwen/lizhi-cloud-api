@@ -71,7 +71,7 @@ public class UserRealm extends AuthorizingRealm {
 
     // 账号不存在
     if (user == null) {
-      throw new UnknownAccountException("账号或密码不正确");
+      throw new UnknownAccountException("账号不存在");
     }
 
     // 账号锁定
@@ -79,10 +79,8 @@ public class UserRealm extends AuthorizingRealm {
       throw new LockedAccountException("账号已被锁定,请联系管理员");
     }
 
-    // 获取盐值，即用户名
-    //		ByteSource salt = ByteSource.Util.bytes(username);
     return new SimpleAuthenticationInfo(
-        user.getUsername(), user.getPassword(), ByteSource.Util.bytes(user.getSalt()), getName());
+        user, user.getPassword(), ByteSource.Util.bytes(user.getSalt()), getName());
   }
 
   @Override
